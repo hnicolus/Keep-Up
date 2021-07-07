@@ -1,9 +1,7 @@
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-import { makeStyles } from "@material-ui/core";
 import SimpleMenu from "../components/Menu";
 import Link from "../src/Link";
-import Donate from "./Donate";
 
 export default function Header() {
   return (
