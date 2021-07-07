@@ -1,6 +1,8 @@
 import {http} from './httpService';
+import * as helper from "../utils/helpers";
 
 
+const currentMonth = new Date().getMonth();
 export const getAll = async () => {
     try {
     const { data } =  await http.get(`/getDonations`);
@@ -10,6 +12,21 @@ export const getAll = async () => {
     }
 }
 
+export  const getMonthlyDonations =async (suburb) =>{
+    try {
+        const moneyRecivedArr = [];
+        for (let x = 0; x <= currentMonth; x++) {
+            const results = await getAllByMonthAndSuburb(suburb, x);
+            const sum = helper.sumOf(results, 'amount');
+            moneyRecivedArr.push(sum);
+        }
+        return moneyRecivedArr;
+
+    }catch (e) {
+
+        throw  new Error(e.message);
+    }
+}
 export const getAllByMonthAndSuburb = async (suburb, month, year =null)=>{
 try {
     if(year === null) year = new Date().getFullYear();
