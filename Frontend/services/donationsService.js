@@ -16,7 +16,7 @@ try {
 
     let results = await getAllBySuburb(suburb);
     if( results.length > 0 ){
-        results = results.filterByMonthAndYear(month,year);
+        results = results.filterByMonthAndYear(month,year,'transactionDate');
     }
 
     return results;
