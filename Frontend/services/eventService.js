@@ -1,13 +1,12 @@
 import {http } from './httpService';
-
 const currentDate = new Date();
 
-export const getByMonthAndSuburb = async (month,suburb )=>{
+export const getByMonthAndSuburb = async (month,year = currentDate.getFullYear(),suburb )=>{
     try {
         const results = await getBySuburb(suburb);
-        return results.filter(event =>{
+        return results.filter(event => {
             const itemDate = new Date(event.date);
-            return itemDate.getMonth === month && currentDate.getFullYear() === itemDate.getFullYear();
+            return itemDate.getMonth === month &&  itemDate.getFullYear() === year;
         })
     } catch (error) {
         throw new Error(error.message);
@@ -28,8 +27,13 @@ export const getBySuburb = async (suburb)=>{
 
 export const getUpcoming =async (suburb)=>{
     try {
-        const result =await getBySuburb(suburb);
-        return result.filter(event =>new Date(event.date).getTime() > currentDate.getTime());
+        let  result ;
+        result = await getBySuburb(suburb);
+
+        if(result.length >  0 ){
+            result = result.filter(event =>new Date(event.date).getTime() > currentDate.getTime());
+        }
+        return result;
     } catch (error) {
         throw new Error(error.message);
     }
@@ -41,11 +45,18 @@ export const getCompleted = async(suburb, month = null) =>{
         if(month != null)
         {
             result = await getByMonthAndSuburb(month,suburb);
-            return result.filter(event =>new Date(event.date).getDay < currentDate.getDay );
-        }else{
-            result = await getBySuburb(suburb);
-            return result.filter(event => new Date(event.date).getTime() < currentDate.getTime() );
+
+            if(result.length > 0 ){
+                result =  result.filter(event =>new Date(event.date).getDay < currentDate.getDay );
+            }
+            return  result ;
         }
+        result = await getBySuburb(suburb);
+
+        if(result.length > 0 ){
+            return result.filter(event => new Date(event.date).getTime() < currentDate.getTime());
+        }
+        return  result;
 
     } catch (error) {
         throw new Error(error.message);
