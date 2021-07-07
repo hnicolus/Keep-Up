@@ -6,6 +6,7 @@ import Icon from '@material-ui/core/Icon';
 const MiniCard =({label,data,icon})=>{
 
     React.useEffect(() => {
+        //lazy load font awesome css
         const node = loadCSS(
             'https://use.fontawesome.com/releases/v5.12.0/css/all.css',
             document.querySelector('#font-awesome-css'),
