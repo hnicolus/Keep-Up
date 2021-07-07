@@ -6,6 +6,7 @@ import  * as donationService from '../../../services/donationsService';
 import * as contributorService from '../../../services/contributorService';
 import * as eventService from '../../../services/eventService';
 import * as helper from '../../../utils/helpers';
+
 import MiniCard from "./MiniCard";
 import SuburbSelector from "./SuburbSelector";
 
@@ -14,58 +15,47 @@ const currentMonth = new Date().getMonth();
 function Statistics() {
 
     const [statsCardsData, setStatsCardsData] = useState([]);
-    const [suburb,setSuburb] = useState('sandown')
+    const [suburb,setSuburb] = useState('sandown');
 
     useEffect(()=>{
         (async ()=>{
-            const data = [];
-
-            const upComingEvents = await eventService.getAllUpComing(suburb);
-            data.push({
-                label:'Up Coming Events',
-                data: upComingEvents.length,
-                icon:'fas fa-calendar-alt'
-            });
-
-            const completedEvents = await eventService.getCompleted(suburb,currentMonth);
-            data.push({
-                label:'Current Month Completed Events',
-                data: completedEvents.length,
-                icon:'far fa-calendar-check'
-            });
-
-            const projects =await projectService.getByMonthAndSuburb(suburb,currentMonth);
-            data.push({
-                label:'Current Month Total Spent',
-                data: `R ${helper.sumOf(projects,'spend')}`,
-                icon:'fas fa-money-bill-wave'
-            });
-
-            const currentMonthCompletedProject = await projectService.getCompleted(suburb,currentMonth);
-            data.push({
-                label:'Current Completed Projects',
-                data: currentMonthCompletedProject.length,
-                icon:'far fa-calendar-check'
-                });
-
-            const upcomingProjects =  await projectService.getUpComing(suburb);
-            data.push({
-                label:'Up Coming Projects',
-                data: upcomingProjects.length,
-                icon:'fas fa-calendar-alt'
-            });
-            const donations = await donationService.getAllByMonthAndSuburb(suburb,currentMonth);
-            data.push({
-                label:'Current Month Total Donation',
-                data: `R ${helper.sumOf(donations,'amount')}`,
-                icon:'fas fa-money-bill-alt'
-            });
-
-            data.push({
-                label:'New Registered Contributors',
-                data: ` ${(await contributorService.getAllByMonthAndSuburb(suburb,currentMonth)).length}`,
-                icon:'fas fa-user-friends'
-            });
+            const data = [
+                {
+                    label:'Up Coming Events',
+                    data: (await eventService.getAllUpComing(suburb)).length,
+                    icon:'fas fa-calendar-alt'
+                },
+                {
+                    label:'Current Month Completed Events',
+                    data: (await eventService.getCompleted(suburb,currentMonth)).length,
+                    icon:'far fa-calendar-check'
+                },
+                {
+                    label:'Current Month Total Spent',
+                    data: `R ${helper.sumOf(await projectService.getByMonthAndSuburb(suburb,currentMonth),'spend')}`,
+                    icon:'fas fa-money-bill-wave'
+                },
+                {
+                    label:'Current Completed Projects',
+                    data: (await projectService.getCompleted(suburb,currentMonth)).length,
+                    icon:'far fa-calendar-check'
+                },
+                {
+                    label:'Up Coming Projects',
+                    data: ( await projectService.getUpComing(suburb)).length,
+                    icon:'fas fa-calendar-alt'
+                },
+                {
+                    label:'Current Month Total Donation',
+                    data: `R ${helper.sumOf(await donationService.getAllByMonthAndSuburb(suburb,currentMonth),'amount')}`,
+                    icon:'fas fa-money-bill-alt'
+                },
+                {
+                    label:'New Registered Contributors',
+                    data: ` ${(await contributorService.getAllByMonthAndSuburb(suburb,currentMonth)).length}`,
+                    icon:'fas fa-user-friends'
+                }
+            ];
             setStatsCardsData(data);
         })()
       },[suburb])
