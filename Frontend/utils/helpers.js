@@ -7,10 +7,10 @@ export const sumOf = (data, propertyName)=>{
     return   total;
 }
 
-Array.prototype.filterByMonthAndYear = function (month,year) {
+Array.prototype.filterByMonthAndYear = function (month,year,datePropertyName = 'date') {
     let input = this;
-    return input.filter(donation => {
-        const date = new Date(donation.transactionDate);
+    return input.filter(item => {
+        const date = new Date(item[datePropertyName]);
         return date.getMonth() === month && date.getFullYear() === year;
     });
 }
