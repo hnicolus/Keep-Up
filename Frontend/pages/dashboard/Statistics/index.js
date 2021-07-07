@@ -17,7 +17,7 @@ function Statistics() {
 
     useEffect(()=>{
         (async ()=>{
-            const data = [...statsCardsData];
+            const data = [];
 
             const upComingEvents = await eventService.getUpcoming(suburb);
             data.push({
