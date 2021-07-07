@@ -6,3 +6,11 @@ export const sumOf = (data, propertyName)=>{
     }
     return   total;
 }
+
+Array.prototype.filterByMonthAndYear = function (month,year) {
+    let input = this;
+    return input.filter(donation => {
+        const date = new Date(donation.transactionDate);
+        return date.getMonth() === month && date.getFullYear() === year;
+    });
+}
