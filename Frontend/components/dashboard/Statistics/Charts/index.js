@@ -16,19 +16,22 @@ const Charts = ({suburb})=>{
 
     const [moneySpent,setMoneySpent] = useState([]);
     const [moneyReceived,setMoneyReceived] = useState([]);
+    const [isLoading,setIsLoading] = useState(false);
 
     useEffect(()=>{
         (async ()=>{
+            setIsLoading(true);
             setMoneySpent(await  projectService.getMonthlyExpenses(suburb));
             setMoneyReceived(await donationService.getMonthlyDonations(suburb));
+            setIsLoading(false);
         })()
     },[]);
 
     return (
-        <>
         <Grid container spacing={2}>
             <Grid item xm={12} xs={12} md={8}>
                 <MoneyChart months={months}
+                            loading={isLoading}
                             moneyReceived={moneyReceived}
                             moneyReceivedColor={moneyReceivedColor}
                             moneySpentColor={moneySpentColor}
@@ -36,13 +39,13 @@ const Charts = ({suburb})=>{
             </Grid>
             <Grid item xm={12} xs={12} md={4}>
                 <MoneyPieChart months={months}
-                               moneyReceived={moneyReceived}
-                               moneySpent={moneySpent}
-                               moneyReceivedColor={moneyReceivedColor}
-                               moneySpentColor={moneySpentColor}/>
+                           moneyReceived={moneyReceived}
+                           moneySpent={moneySpent}
+                           moneyReceivedColor={moneyReceivedColor}
+                           moneySpentColor={moneySpentColor}
+                            loading={isLoading}/>
             </Grid>
         </Grid>
-        </>
     )
 }
 export  default  Charts;
