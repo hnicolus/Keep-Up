@@ -6,7 +6,7 @@ import  * as donationService from '../../../services/donationsService';
 import * as contributorService from '../../../services/contributorService';
 import * as eventService from '../../../services/eventService';
 import * as helper from '../../../utils/helpers';
-import MiniCard from "../../../components/dashboard/MiniCard";
+import MiniCard from "./MiniCard";
 
 function Statistics() {
 
