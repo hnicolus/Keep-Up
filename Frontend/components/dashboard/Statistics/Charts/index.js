@@ -1,9 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {Grid} from "@material-ui/core";
+
 import MoneyChart from "./MoneyChart";
 import MoneyPieChart from "./MoneyPieChart";
+
 import * as projectService from "../../../../services/projectsService";
 import * as donationService from "../../../../services/donationsService";
+
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
 
 const moneyReceivedColor ='rgb(54, 162, 235)';
