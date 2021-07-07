@@ -62,7 +62,7 @@ function Statistics() {
                 icon:'fas fa-money-bill-alt'
             });
 
-            //Todo Contributor should have a contribution Date in order to be filtered
+            //Todo Show new  Contributors for current month
             const contributors = await contributorService.getBySuburb(suburb);
             setStatsCardsData(data);
         })()
