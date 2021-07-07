@@ -1,7 +1,6 @@
 import {http } from './httpService';
 import * as helper from "../utils/helpers";
 
-
 const currentDate = new Date();
 
 export const getByMonthAndSuburb=async (suburb,month,year = currentDate.getFullYear())=>{
