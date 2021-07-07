@@ -19,15 +19,15 @@ const MoneyChart = ({months,moneyRecieved,moneySpent, moneySpentColor,moneyRecei
 
         datasets: [
             {
-                label: '# Money Recieved',
+                label: '# Money (R) Spent',
+                data:  [...moneySpent],
+                backgroundColor: moneySpentColor,
+            },
+            {
+                label: '# Money (R) Recieved',
                 data:[...moneyRecieved],
                 backgroundColor: moneyReceivedColor,
             },
-            {
-                label: '# Money Spent',
-                data:  [...moneySpent],
-                backgroundColor: moneySpentColor,
-            }
         ],
     };
     return (
