@@ -2,6 +2,7 @@ import {FormControl, InputLabel, MenuItem, Select} from "@material-ui/core";
 import React from "react";
 
 const SuburbSelector = ({onSuburbChange})=>{
+    //Todo load  Suburbs
     return (
         <FormControl >
             <InputLabel shrink htmlFor="age-native-label-placeholder">
