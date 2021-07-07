@@ -62,8 +62,11 @@ function Statistics() {
                 icon:'fas fa-money-bill-alt'
             });
 
-            //Todo Show new  Contributors for current month
-            const contributors = await contributorService.getBySuburb(suburb);
+            data.push({
+                label:'New Registered Contributors',
+                data: ` ${(await contributorService.getByMonthAndSubrub(currentMonth,suburb)).length}`,
+                icon:'fas fa-user-friends'
+            });
             setStatsCardsData(data);
         })()
       },[suburb])
