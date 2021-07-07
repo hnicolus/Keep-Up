@@ -1,8 +1,12 @@
-import React from "react";
 import Dashboard from "../../components/dashboard/Dashboard";
+import Statistics from "./Statistics";
 
 function index() {
-  return <Dashboard></Dashboard>;
+
+  return (
+  <Dashboard>
+      <Statistics/>
+  </Dashboard>);
 }
 
 export default index;
