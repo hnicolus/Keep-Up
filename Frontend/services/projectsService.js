@@ -3,12 +3,15 @@ import {http } from './httpService';
 
 const currentDate = new Date();
 
-export const getByMonthAndSuburb=async (month,suburb)=>{
+export const getByMonthAndSuburb=async (month,year = currentDate.getFullYear(),suburb)=>{
 
     try {
         const results =await  getBySuburb(suburb);
 
-        return results.filter(project =>new Date(project.date).getMonth() === month);
+        return results.filter(project =>{
+            const date = new Date(project.date)
+            return date.getMonth() === month && date.getFullYear() === year
+        });
 
     } catch (error) {
         throw new Error(error.message)
