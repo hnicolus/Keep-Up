@@ -14,32 +14,34 @@ export const getAll = async () => {
 
 export  const getMonthlyDonations =async (suburb) =>{
     try {
-        const moneyRecivedArr = [];
+
+        const moneyReceivedArr = [];
+
         for (let x = 0; x <= currentMonth; x++) {
             const results = await getAllByMonthAndSuburb(suburb, x);
             const sum = helper.sumOf(results, 'amount');
-            moneyRecivedArr.push(sum);
+            moneyReceivedArr.push(sum);
         }
-        return moneyRecivedArr;
+        return moneyReceivedArr;
 
     }catch (e) {
-
         throw  new Error(e.message);
     }
 }
 export const getAllByMonthAndSuburb = async (suburb, month, year =null)=>{
-try {
-    if(year === null) year = new Date().getFullYear();
+    try {
+        if(year === null) year = new Date().getFullYear();
 
-    let results = await getAllBySuburb(suburb);
-    if( results.length > 0 ){
-        results = results.filterByMonthAndYear(month,year,'transactionDate');
+        let results = await getAllBySuburb(suburb);
+
+        if( results.length > 0 ){
+            results = results.filterByMonthAndYear(month,year,'transactionDate');
+        }
+
+        return results;
+    } catch (error) {
+        throw new Error(error.message)
     }
-
-    return results;
-} catch (error) {
-    throw new Error(error.message)
-}
 }
 
 
