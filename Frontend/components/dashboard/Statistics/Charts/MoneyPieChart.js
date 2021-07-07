@@ -13,14 +13,14 @@ const options = {
         ],
     },
 };
-const MoneyPieChart = ({moneyRecieved,moneySpent}) =>{
+const MoneyPieChart = ({ moneyReceived,moneySpent}) =>{
     const data = {
-        labels: ['Recieved (R)', 'Spent (R)'],
+        labels: ['Received (R)', 'Spent (R)'],
 
         datasets: [
             {
                 label: '# Money (R)',
-                data:[sumOf(moneyRecieved),sumOf(moneySpent)],
+                data:[sumOf(moneyReceived),sumOf(moneySpent)],
                 backgroundColor: [
                     'rgb(54, 162, 235)',
                     'rgb(194, 194, 194)'

@@ -13,7 +13,7 @@ const options = {
         ],
     },
 };
-const MoneyChart = ({months,moneyRecieved,moneySpent, moneySpentColor,moneyReceivedColor}) =>{
+const MoneyChart = ({months, moneyReceived,moneySpent, moneySpentColor,moneyReceivedColor}) =>{
     const data = {
         labels: months,
 
@@ -24,8 +24,8 @@ const MoneyChart = ({months,moneyRecieved,moneySpent, moneySpentColor,moneyRecei
                 backgroundColor: moneySpentColor,
             },
             {
-                label: '# Money (R) Recieved',
-                data:[...moneyRecieved],
+                label: '# Money (R) Received',
+                data:[...moneyReceived],
                 backgroundColor: moneyReceivedColor,
             },
         ],

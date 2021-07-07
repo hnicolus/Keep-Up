@@ -25,14 +25,15 @@ const Charts = ({suburb})=>{
         <>
         <Grid container spacing={2}>
             <Grid item xm={12} xs={12} md={8}>
-                <MoneyChart months={months} moneyRecieved={moneyReceived}
+                <MoneyChart months={months}
+                            moneyReceived={moneyReceived}
                             moneyReceivedColor={moneyReceivedColor}
                             moneySpentColor={moneySpentColor}
                             moneySpent={moneySpent}/>
             </Grid>
             <Grid item xm={12} xs={12} md={4}>
                 <MoneyPieChart months={months}
-                               moneyRecieved={moneyReceived}
+                               moneyReceived={moneyReceived}
                                moneySpent={moneySpent}
                                moneyReceivedColor={moneyReceivedColor}
                                moneySpentColor={moneySpentColor}/>
