@@ -41,9 +41,11 @@ const Cards = ({suburb})=>{
 
     const currentMonth = new Date().getMonth();
     const [statsCardsData, setStatsCardsData] = useState([]);
+    const [isLoading,setLoading] = useState(false);
 
     useEffect(()=>{
         (async ()=>{
+            setLoading(true);
             const data = [
                 {
                     label:'Current Month Total Donation',
@@ -89,10 +91,11 @@ const Cards = ({suburb})=>{
                 }
             ];
             setStatsCardsData(data);
+            setLoading(false);
         })()
     },[suburb]);
 
-    if(statsCardsData.length === 0) return (displaySkeletons());
+    if(isLoading) return (displaySkeletons());
 
     return(
         <Grid container spacing={2}>
