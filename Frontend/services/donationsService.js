@@ -1,5 +1,5 @@
 import {http} from './httpService';
-const currentDate =new Date();
+
 
 export const getAll = async () => {
     try {
@@ -9,24 +9,32 @@ export const getAll = async () => {
     throw new Error(error.message);
     }
 }
-export const getByMonthAndSuburb = async (month,year = currentDate.getFullYear(),suburb)=>{
-try {
-    const results = await getBySuburb(suburb);
-    return results.filter(donation =>{
-        const date = new Date(donation.transactionDate);
-        return  date.getMonth() === month && date.getFullYear() === year;
-    });
 
+export const getAllByMonthAndSuburb = async (suburb, month, year =null)=>{
+try {
+    if(year === null) year = new Date().getFullYear();
+
+    let results = await getAllBySuburb(suburb);
+    if( results.length > 0 ){
+        results = results.filterByMonthAndYear(month,year);
+    }
+
+    return results;
 } catch (error) {
     throw new Error(error.message)
 }
 }
 
 
-export const getBySuburb =async (suburb)=>{
+export const getAllBySuburb =async (suburb)=>{
     try {
-        const result =  await getAll();
-        return result.filter(donation => donation.reference.toLowerCase() === suburb.toLowerCase());
+        let result =  await getAll();
+
+        if( result.length > 0 )
+        {
+           result =  result.filter(donation => donation.reference.toLowerCase() === suburb.toLowerCase());
+        }
+        return result;
 
     } catch (error) {
 
