@@ -1,4 +1,5 @@
 import {http } from './httpService';
+import * as helper from "../utils/helpers";
 
 
 const currentDate = new Date();
@@ -37,7 +38,21 @@ export const getUpComing = async(suburb)=>{
         throw new Error(error.message);
     }
 }
+export const getMonthlyExpenses =async (suburb) =>{
+    try {
+        const spentArr = [];
+        for (let x = 0; x <= currentDate.getMonth(); x++) {
+            const results = await getByMonthAndSuburb(suburb, x);
+            const sum = helper.sumOf(results, 'spend');
+            spentArr.push(sum);
+        }
 
+        return spentArr;
+
+    }catch (e) {
+        throw new Error(e.message)
+    }
+}
 export const  getCompleted = async(suburb, month = null)=>{
     try {
         let results ;
