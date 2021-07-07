@@ -1,8 +1,12 @@
-export const sumOf = (data, propertyName)=>{
+export const sumOf = (data, propertyName = null)=>{
     let total = 0;
     for (let x = 0; x < data.length; x++) {
-        const donation = data[x];
-        total += Number(donation[propertyName]);
+        const item = data[x];
+        if(propertyName){
+            total += Number(item[propertyName]);
+        }else{
+            total += item;
+        }
     }
     return   total;
 }
