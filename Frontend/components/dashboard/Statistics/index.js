@@ -7,13 +7,14 @@ import * as contributorService from '../../../services/contributorService';
 import * as eventService from '../../../services/eventService';
 import * as helper from '../../../utils/helpers';
 import MiniCard from "./MiniCard";
+import SuburbSelector from "./SuburbSelector";
+
+const currentMonth = new Date().getMonth();
 
 function Statistics() {
 
     const [statsCardsData, setStatsCardsData] = useState([]);
     const [suburb,setSuburb] = useState('sandown')
-
-    const currentMonth = new Date().getMonth();
 
     useEffect(()=>{
         (async ()=>{
@@ -65,11 +66,12 @@ function Statistics() {
             const contributors = await contributorService.getBySuburb(suburb);
             setStatsCardsData(data);
         })()
-      },[suburb]);
+      },[suburb])
 
     return (
         <div>
             <Container>
+                <SuburbSelector onSuburbChange={suburb=>setSuburb(suburb)}/>
                 <Grid container spacing={2}>
                   {statsCardsData.map((statsData,index) =>(
                       <Grid key={index} item xs={12} sm={4} md={3}>
