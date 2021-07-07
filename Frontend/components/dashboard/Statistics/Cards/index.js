@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from "react";
 import {Card, CardContent, Grid, Typography} from "@material-ui/core";
+import {Skeleton} from "@material-ui/lab";
+
+import {sumOf} from "../../../../utils/helpers";
 import MiniCard from "./MiniCard";
 
 import * as eventService from "../../../../services/eventService";
-import * as helper from "../../../../utils/helpers";
 import * as projectService from "../../../../services/projectsService";
 import * as donationService from "../../../../services/donationsService";
 import * as contributorService from "../../../../services/contributorService";
-import {Skeleton} from "@material-ui/lab";
 
 const displaySkeletons=()=>{
     const skeletons = [1,2,3,4,5,6,7,8];
@@ -56,7 +57,7 @@ const Cards = ({suburb})=>{
                 },
                 {
                     label:'Current Month Total Spent',
-                    data: `R ${helper.sumOf(await projectService.getByMonthAndSuburb(suburb,currentMonth),'spend').toFixed(2)}`,
+                    data: `R ${sumOf(await projectService.getByMonthAndSuburb(suburb,currentMonth),'spend').toFixed(2)}`,
                     icon:'fas fa-money-bill-wave'
                 },
                 {
@@ -71,7 +72,7 @@ const Cards = ({suburb})=>{
                 },
                 {
                     label:'Current Month Total Donation',
-                    data: `R ${helper.sumOf(await donationService.getAllByMonthAndSuburb(suburb,currentMonth),'amount').toFixed(2)}`,
+                    data: `R ${sumOf(await donationService.getAllByMonthAndSuburb(suburb,currentMonth),'amount').toFixed(2)}`,
                     icon:'fas fa-money-bill-alt'
                 },
                 {
