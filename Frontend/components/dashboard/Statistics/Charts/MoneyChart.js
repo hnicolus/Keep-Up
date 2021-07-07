@@ -16,7 +16,6 @@ const options = {
 const MoneyChart = ({months, moneyReceived,moneySpent, moneySpentColor,moneyReceivedColor}) =>{
     const data = {
         labels: months,
-
         datasets: [
             {
                 label: '# Money (R) Spent',
