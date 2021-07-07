@@ -9,13 +9,19 @@ import * as helper from '../../../utils/helpers';
 
 import MiniCard from "./MiniCard";
 import SuburbSelector from "./SuburbSelector";
+import MoneyChart from "./MoneyChart";
+import MoneyPieChart from "./MoneyPieChart";
 
 const currentMonth = new Date().getMonth();
-
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
+const moneyReceivedColor ='rgb(194, 194, 194)';
+const moneySpentColor = 'rgb(54, 162, 235)'
 function Statistics() {
 
     const [statsCardsData, setStatsCardsData] = useState([]);
     const [suburb,setSuburb] = useState('sandown');
+    const [moneySpent,setMoneySpent] = useState([]);
+    const [moneyRecieved,setMoneyRecieved] = useState([]);
 
     useEffect(()=>{
         (async ()=>{
@@ -59,6 +65,26 @@ function Statistics() {
             setStatsCardsData(data);
         })()
       },[suburb])
+    useEffect(()=>{
+        (async ()=>{
+
+            const spentArr = [];
+            for (let x = 0; x <= currentMonth; x++) {
+                const results = await projectService.getByMonthAndSuburb('sandown', x);
+                const sum = helper.sumOf(results, 'spend');
+                spentArr.push(sum);
+            }
+            setMoneySpent(spentArr);
+
+            const moneyRecivedArr = [];
+            for (let x = 0; x <= currentMonth; x++) {
+                const results = await donationService.getAllByMonthAndSuburb('sandown', x);
+                const sum = helper.sumOf(results, 'amount');
+                moneyRecivedArr.push(sum);
+            }
+            setMoneyRecieved(moneyRecivedArr)
+        })();
+    },[]);
 
     return (
         <div>
@@ -72,6 +98,19 @@ function Statistics() {
                                    icon={statsData.icon} />
                       </Grid>
                   ))}
+                    <Grid item xm={12} xs={12} md={8}>
+                        <MoneyChart months={months} moneyRecieved={moneyRecieved}
+                                    moneyReceivedColor={moneyReceivedColor}
+                                    moneySpentColor={moneySpentColor}
+                                    moneySpent={moneySpent}/>
+                    </Grid>
+                    <Grid item xm={12} xs={12} md={4}>
+                        <MoneyPieChart months={months}
+                                       moneyRecieved={moneyRecieved}
+                                       moneySpent={moneySpent}
+                                       moneyReceivedColor={moneyReceivedColor}
+                                       moneySpentColor={moneySpentColor}/>
+                    </Grid>
                 </Grid>
             </Container>
         </div>
