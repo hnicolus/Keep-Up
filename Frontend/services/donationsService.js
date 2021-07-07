@@ -1,4 +1,5 @@
 import {http} from './httpService';
+const currentDate =new Date();
 
 export const getAll = async () => {
     try {
@@ -8,10 +9,13 @@ export const getAll = async () => {
     throw new Error(error.message);
     }
 }
-export const getByMonthAndSuburb = async (month,suburb)=>{
+export const getByMonthAndSuburb = async (month,year = currentDate.getFullYear(),suburb)=>{
 try {
     const results = await getBySuburb(suburb);
-    return results.filter(donation =>new Date(donation.transactionDate).getMonth() === month);
+    return results.filter(donation =>{
+        const date = new Date(donation.transactionDate);
+        return  date.getMonth() === month && date.getFullYear() === year;
+    });
 
 } catch (error) {
     throw new Error(error.message)
