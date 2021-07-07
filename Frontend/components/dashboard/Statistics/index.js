@@ -20,7 +20,7 @@ function Statistics() {
         (async ()=>{
             const data = [];
 
-            const upComingEvents = await eventService.getUpcoming(suburb);
+            const upComingEvents = await eventService.getAllUpComing(suburb);
             data.push({
                 label:'Up Coming Events',
                 data: upComingEvents.length,
@@ -34,7 +34,7 @@ function Statistics() {
                 icon:'far fa-calendar-check'
             });
 
-            const projects =await projectService.getByMonthAndSuburb(currentMonth,suburb);
+            const projects =await projectService.getByMonthAndSuburb(suburb,currentMonth);
             data.push({
                 label:'Current Month Total Spent',
                 data: `R ${helper.sumOf(projects,'spend')}`,
@@ -54,8 +54,7 @@ function Statistics() {
                 data: upcomingProjects.length,
                 icon:'fas fa-calendar-alt'
             });
-
-            const donations = await donationService.getByMonthAndSuburb(currentMonth,suburb);
+            const donations = await donationService.getAllByMonthAndSuburb(suburb,currentMonth);
             data.push({
                 label:'Current Month Total Donation',
                 data: `R ${helper.sumOf(donations,'amount')}`,
@@ -64,7 +63,7 @@ function Statistics() {
 
             data.push({
                 label:'New Registered Contributors',
-                data: ` ${(await contributorService.getByMonthAndSubrub(currentMonth,suburb)).length}`,
+                data: ` ${(await contributorService.getAllByMonthAndSuburb(suburb,currentMonth)).length}`,
                 icon:'fas fa-user-friends'
             });
             setStatsCardsData(data);
