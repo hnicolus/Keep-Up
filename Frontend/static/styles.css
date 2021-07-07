@@ -195,3 +195,6 @@ body {
     display: none;
   }
 }
+.fa, .fab, .fad, .fal, .far, .fas {
+  display: inline-table !important;
+}
