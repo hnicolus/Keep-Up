@@ -46,39 +46,46 @@ const Cards = ({suburb})=>{
         (async ()=>{
             const data = [
                 {
-                    label:'Up Coming Events',
-                    data: (await eventService.getAllUpComing(suburb)).length,
-                    icon:'fas fa-calendar-alt'
-                },
-                {
-                    label:'Current Month Completed Events',
-                    data: (await eventService.getCompleted(suburb,currentMonth)).length,
-                    icon:'far fa-calendar-check'
+                    label:'Current Month Total Donation',
+                    data: `R ${sumOf(await donationService.getAllByMonthAndSuburb(suburb,currentMonth),'amount').toFixed(2)}`,
+                    icon:'fas fa-money-bill-alt',
+                    color:"#d326d9",
                 },
                 {
                     label:'Current Month Total Spent',
                     data: `R ${sumOf(await projectService.getByMonthAndSuburb(suburb,currentMonth),'spend').toFixed(2)}`,
-                    icon:'fas fa-money-bill-wave'
+                    icon:'fas fa-money-bill-wave',
+                    color:"#7b26d9",
+                },
+                {
+                    label:'Up Coming Events',
+                    data: (await eventService.getAllUpComing(suburb)).length,
+                    icon:'fas fa-calendar-alt',
+                    color:"#36cbc0",
+                },
+                {
+                    label:'Current Month Completed Events',
+                    data: (await eventService.getCompleted(suburb,currentMonth)).length,
+                    icon:'far fa-calendar-check',
+                    color:"#ff6a00"
                 },
                 {
                     label:'Current Completed Projects',
                     data: (await projectService.getCompleted(suburb,currentMonth)).length,
-                    icon:'far fa-calendar-check'
+                    icon:'far fa-calendar-check',
+                    color:"#d9d026",
                 },
                 {
                     label:'Up Coming Projects',
                     data: ( await projectService.getUpComing(suburb)).length,
-                    icon:'fas fa-calendar-alt'
-                },
-                {
-                    label:'Current Month Total Donation',
-                    data: `R ${sumOf(await donationService.getAllByMonthAndSuburb(suburb,currentMonth),'amount').toFixed(2)}`,
-                    icon:'fas fa-money-bill-alt'
+                    icon:'fas fa-calendar-alt',
+                    color:"#47d926",
                 },
                 {
                     label:'New Registered Contributors',
                     data: ` ${(await contributorService.getAllByMonthAndSuburb(suburb,currentMonth)).length}`,
-                    icon:'fas fa-user-friends'
+                    icon:'fas fa-user-friends',
+                    color:"#d92650",
                 }
             ];
             setStatsCardsData(data);
@@ -93,7 +100,8 @@ const Cards = ({suburb})=>{
                 <Grid key={index} item xs={12} sm={6} md={3}>
                     <MiniCard  label={statsData.label}
                                data={statsData.data}
-                               icon={statsData.icon} />
+                               icon={statsData.icon}
+                                color={statsData.color}/>
                 </Grid>
             ))}
         </Grid>
