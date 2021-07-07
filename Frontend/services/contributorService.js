@@ -2,7 +2,7 @@ import {http} from './httpService';
 
 const currentDate =new Date();
 export const getAllBySuburb =async (suburb) =>{
-const path = `/getContributors?suburb=${suburb}`;
+    const path = `/getContributors?suburb=${suburb}`;
     try {
         
         const {data } =await http.get(path);
