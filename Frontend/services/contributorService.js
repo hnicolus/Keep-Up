@@ -1,6 +1,6 @@
 import {http} from './httpService';
 
-
+const currentDate =new Date();
 export const getBySuburb =async (suburb) =>{
 const path = `/getContributors?suburb=${suburb}`;
     try {
@@ -13,10 +13,15 @@ const path = `/getContributors?suburb=${suburb}`;
     }
 }
 
-export const getByMonthAndSubrub = async (month,suburb) =>{
+export const getByMonthAndSubrub = async (month,year = currentDate.getFullYear(),suburb) =>{
     try {
-        const result = await getBySuburb(suburb);
-        return result.filter(contributor =>contributor.suburb.toLowerCase() === suburb.toLowerCase());
+        let result ;
+         result = await getBySuburb(suburb);
+
+         return  result.filter(contributor =>{
+            const regDate= new Date(contributor.date);
+            return  regDate.getMonth() === month && regDate.getFullYear() === year;
+        });
 
     } catch (error) {
         throw new Error(error.message);
