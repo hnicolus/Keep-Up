@@ -1,26 +1,33 @@
 import React from "react";
-import { Pie } from 'react-chartjs-2';
-import {Card, CardContent, Typography} from "@material-ui/core";
+import {Pie} from 'react-chartjs-2';
+import {Card, CardContent, Grid, Typography} from "@material-ui/core";
 import {sumOf} from "../../../../utils/helpers";
-const options = {
-    scales: {
-        yAxes: [
-            {
-                ticks: {
-                    beginAtZero: true,
-                },
-            },
-        ],
-    },
-};
-const MoneyPieChart = ({ moneyReceived,moneySpent}) =>{
+import {Skeleton} from "@material-ui/lab";
+
+const displaySkeleton = () => {
+    return (
+        <Card>
+            <CardContent>
+                <div className='header'>
+                    <Typography variant='h6'><Skeleton variant='text'/></Typography>
+                </div>
+                <Grid container justify='center'>
+                    <Grid item style={{padding:'10px'}}>
+                        <Skeleton variant='circle' width={270} height={270}/>
+                    </Grid>
+                </Grid>
+            </CardContent>
+        </Card>
+    )
+}
+const MoneyPieChart = ({moneyReceived, moneySpent,loading}) => {
     const data = {
         labels: ['Received (R)', 'Spent (R)'],
 
         datasets: [
             {
                 label: '# Money (R)',
-                data:[sumOf(moneyReceived),sumOf(moneySpent)],
+                data: [sumOf(moneyReceived), sumOf(moneySpent)],
                 backgroundColor: [
                     'rgb(54, 162, 235)',
                     'rgb(194, 194, 194)'
@@ -28,13 +35,15 @@ const MoneyPieChart = ({ moneyReceived,moneySpent}) =>{
             }
         ],
     };
+    if (loading) return displaySkeleton();
+
     return (
         <Card>
             <CardContent>
                 <div className='header'>
                     <Typography variant='h6'>Money Total</Typography>
                 </div>
-                <Pie data={data} options={options} />
+                <Pie data={data}/>
             </CardContent>
         </Card>
     );
