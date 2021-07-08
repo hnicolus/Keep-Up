@@ -33,12 +33,6 @@ const Cards = ({suburb})=>{
                     color:"#7b26d9",
                 },
                 {
-                    label:'Up Coming Events',
-                    data: (await eventService.getAllUpComing(suburb)).length,
-                    icon:'fas fa-calendar-alt',
-                    color:"#36cbc0",
-                },
-                {
                     label:'Current Month Completed Events',
                     data: (await eventService.getCompleted(suburb,currentMonth)).length,
                     icon:'far fa-calendar-check',
@@ -51,10 +45,16 @@ const Cards = ({suburb})=>{
                     color:"#d9d026",
                 },
                 {
-                    label:'Up Coming Projects',
+                    label:'All up Coming Projects',
                     data: ( await projectService.getUpComing(suburb)).length,
                     icon:'fas fa-calendar-alt',
                     color:"#47d926",
+                },
+                {
+                    label:'All up Coming Events',
+                    data: (await eventService.getAllUpComing(suburb)).length,
+                    icon:'fas fa-calendar-alt',
+                    color:"#36cbc0",
                 },
                 {
                     label:'New Registered Contributors',
