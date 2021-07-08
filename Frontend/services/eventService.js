@@ -1,12 +1,11 @@
 import {http } from './httpService';
 const currentDate = new Date();
 
-export const getAllByMonthAndSuburb = async (month, year = currentDate.getFullYear(), suburb )=>{
+export const getAllByMonthAndSuburb = async (suburb,month, year = currentDate.getFullYear() )=>{
 
     try {
-        const results = await getAllBySuburb(suburb);
-        return results.filterByMonthAndYear(month,year);
-
+        let results = await getAllBySuburb(suburb);
+        return  results.filterByMonthAndYear(month,year);
     } catch (error) {
         throw new Error(error.message);
     }   
@@ -17,8 +16,8 @@ export const getAllBySuburb = async (suburb)=>{
     const urlPath = `getEvents?suburb=${suburb}`;
 
     try {
-            const {data } =await http.get(urlPath);
-            return data;
+        const {data } =await http.get(urlPath);
+        return data;
 
     } catch (error) {
         
@@ -49,7 +48,7 @@ export const getCompleted = async(suburb, month = null) =>{
         let result ;
 
         if(month != null)
-            result = await getAllByMonthAndSuburb(month,suburb,currentDate.getFullYear());
+            result = await getAllByMonthAndSuburb(suburb,month,currentDate.getFullYear());
         else
             result = await getAllBySuburb(suburb);
 
