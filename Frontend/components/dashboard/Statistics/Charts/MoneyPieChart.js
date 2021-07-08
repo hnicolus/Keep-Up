@@ -27,7 +27,7 @@ const MoneyPieChart = ({moneyReceived, moneySpent,loading}) => {
                 <div className='header'>
                     <Typography style={{margin:"10px"}} variant='h6'>Money Total</Typography>
                 </div>
-                <Pie data={data}/>
+                <Pie type='pie' data={data}/>
             </CardContent>
         </Card>
     );

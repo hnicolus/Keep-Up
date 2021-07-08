@@ -28,7 +28,7 @@ const MoneyChart = ({months, moneyReceived, moneySpent, moneySpentColor, moneyRe
                 <div className='header'>
                     <Typography style={{margin:"10px"}} variant='h6'>Money received and Money spent</Typography>
                 </div>
-                <Bar data={data} options={options}/>
+                <Bar type='bar' data={data} options={options}/>
             </CardContent>
         </Card>
     );
