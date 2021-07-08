@@ -57,20 +57,14 @@ export const  getCompleted = async(suburb, month = null)=>{
         let results ;
 
         if(month != null){
-            results = await getByMonthAndSuburb(suburb,month) ;
-            if( results.length > 0 ){
-                results = results.filter(event => new Date(event.date).getMonth() === month);
-            }
+            results = await getByMonthAndSuburb(suburb,month,currentDate.getFullYear());
         }else{
             results =await getBySuburb(suburb);
         }
 
         if( results.length > 0 ){
-            return results.filter(project =>{
-            const projectDate = new Date(project.transactionDate);
-            return projectDate.getTime() < currentDate.getTime() && projectDate.getFullYear() === currentDate.getFullYear(); 
-        });
-    }
+            return  results.filter(proj =>new Date(proj.date).getTime() < currentDate.getFullYear());
+        }
 
         return results;
     } catch (error) {
