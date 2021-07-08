@@ -19,7 +19,7 @@ const MiniCard =({label,data,icon,color})=>{
         <Card style={{padding:"10px",minHeight:"130px"}}>
             <CardContent>
                 <Grid container spacing={2} alignItems='center' justify='center'>
-                    <Grid item sm={3}>
+                    <Grid item sm={3} justify='center'>
                         <Typography align='center'>
                             <Icon  fontSize='large' className={icon} style={{color}}/>
                         </Typography>
