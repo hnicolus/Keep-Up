@@ -53,9 +53,9 @@ export const getCompleted = async(suburb, month = null) =>{
         else
             result = await getAllBySuburb(suburb);
 
-        if(result.length > 0 ){
+        if(result.length > 0 )
             return result.filter(event => new Date(event.date).getTime() < currentDate.getTime());
-        }
+
         return  result;
 
     } catch (error) {
