@@ -92,7 +92,7 @@ const displaySkeletons=()=>{
                 <Grid key={index} item xs={12} sm={6} md={3}>
                     <Card>
                         <CardContent>
-                            <Grid container spacing={2} alignItems='center' justify='center'>
+                            <Grid container spacing={2} alignItems='center' justifyContent='center'>
                                 <Grid item sm={3}>
                                     <Typography align='center'>
                                         <Skeleton variant="circle" width={40} height={40} />
