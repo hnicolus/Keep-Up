@@ -16,9 +16,9 @@ export  const getMonthlyDonations =async (suburb) =>{
     try {
 
         const moneyReceivedArr = [];
-
+        const allDonations =await getAll(suburb);
         for (let x = 0; x <= currentMonth; x++) {
-            const results = await getAllByMonthAndSuburb(suburb, x);
+            const results =allDonations.filter(donation=>new Date(donation.transactionDate).getMonth() === x);
             const sum = helper.sumOf(results, 'amount');
             moneyReceivedArr.push(sum);
         }
@@ -34,9 +34,8 @@ export const getAllByMonthAndSuburb = async (suburb, month, year =null)=>{
 
         let results = await getAllBySuburb(suburb);
 
-        if( results.length > 0 ){
+        if( results.length > 0 )
            return  results.filterByMonthAndYear(month,year,'transactionDate');
-        }
 
         return results;
     } catch (error) {
@@ -50,9 +49,8 @@ export const getAllBySuburb =async (suburb)=>{
         let result =  await getAll();
 
         if( result.length > 0 )
-        {
           return  result.filter(donation => donation.reference.toLowerCase() === suburb.toLowerCase());
-        }
+
         return result;
 
     } catch (error) {
