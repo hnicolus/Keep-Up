@@ -45,7 +45,7 @@ const Cards = ({suburb})=>{
                     color:"#ff6a00"
                 },
                 {
-                    label:'Current Completed Projects',
+                    label:'Current Month Completed Projects',
                     data: (await projectService.getCompleted(suburb,currentMonth)).length,
                     icon:'far fa-calendar-check',
                     color:"#d9d026",
