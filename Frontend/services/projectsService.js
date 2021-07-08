@@ -32,7 +32,7 @@ export const getBySuburb = async(suburb)=>{
 export const getUpComing = async(suburb)=>{
     try {
         const projects =await getBySuburb(suburb);
-        return projects.filter(project => new Date(project.transactionDate).getTime() > currentDate.getTime());
+        return projects.filter(project => new Date(project.date).getTime() > currentDate.getTime());
     } catch (error) {
         throw new Error(error.message);
     }
