@@ -40,7 +40,7 @@ const displaySkeleton = () => {
                 <div className='header'>
                     <Typography variant='h6'><Skeleton variant='text' /></Typography>
                 </div>
-                <Grid container justify='center' >
+                <Grid container justifyContent='center' >
                     <Grid item sm={12} xs={12} md={12} style={{paddingTop:'10px',paddingBottom:'10px'}} >
                         <Skeleton height={270} width='100%' variant='rect'/>
                     </Grid>
