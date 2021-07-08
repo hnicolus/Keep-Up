@@ -35,7 +35,7 @@ export const getAllByMonthAndSuburb = async (suburb, month, year =null)=>{
         let results = await getAllBySuburb(suburb);
 
         if( results.length > 0 ){
-            results = results.filterByMonthAndYear(month,year,'transactionDate');
+           return  results.filterByMonthAndYear(month,year,'transactionDate');
         }
 
         return results;
@@ -51,7 +51,7 @@ export const getAllBySuburb =async (suburb)=>{
 
         if( result.length > 0 )
         {
-           result =  result.filter(donation => donation.reference.toLowerCase() === suburb.toLowerCase());
+          return  result.filter(donation => donation.reference.toLowerCase() === suburb.toLowerCase());
         }
         return result;
 
