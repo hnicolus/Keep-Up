@@ -40,8 +40,9 @@ export const getUpComing = async(suburb)=>{
 export const getMonthlyExpenses =async (suburb) =>{
     try {
         const spentArr = [];
+        const allProjects = await  getBySuburb(suburb);
         for (let x = 0; x <= currentDate.getMonth(); x++) {
-            const results = await getByMonthAndSuburb(suburb, x);
+        const results = allProjects.filter(proj=>new Date(proj.date).getMonth() ===x);
             const sum = helper.sumOf(results, 'spend');
             spentArr.push(sum);
         }
@@ -56,15 +57,13 @@ export const  getCompleted = async(suburb, month = null)=>{
     try {
         let results ;
 
-        if(month != null){
+        if(month != null)
             results = await getByMonthAndSuburb(suburb,month,currentDate.getFullYear());
-        }else{
+        else
             results =await getBySuburb(suburb);
-        }
 
-        if( results.length > 0 ){
+        if( results.length > 0 )
             return  results.filter(proj =>new Date(proj.date).getTime() < currentDate.getFullYear());
-        }
 
         return results;
     } catch (error) {
