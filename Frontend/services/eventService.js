@@ -46,24 +46,16 @@ export const getAllUpComing =async (suburb)=>{
 export const getCompleted = async(suburb, month = null) =>{
 
     try {
-
         let result ;
 
         if(month != null)
-        {
-            result = await getAllByMonthAndSuburb(month,suburb);
-
-            if(result.length > 0 ){
-              return  result.filter(event =>new Date(event.date).getDay < currentDate.getDay );
-            }
-            return  result ;
-        }
-        result = await getAllBySuburb(suburb);
+            result = await getAllByMonthAndSuburb(month,suburb,currentDate.getFullYear());
+        else
+            result = await getAllBySuburb(suburb);
 
         if(result.length > 0 ){
             return result.filter(event => new Date(event.date).getTime() < currentDate.getTime());
         }
-
         return  result;
 
     } catch (error) {
