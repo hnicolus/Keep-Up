@@ -4,22 +4,6 @@ import {Card, CardContent, Grid, Typography} from "@material-ui/core";
 import {sumOf} from "../../../../utils/helpers";
 import {Skeleton} from "@material-ui/lab";
 
-const displaySkeleton = () => {
-    return (
-        <Card>
-            <CardContent>
-                <div className='header'>
-                    <Typography variant='h6'><Skeleton variant='text'/></Typography>
-                </div>
-                <Grid container justify='center'>
-                    <Grid item style={{padding:'10px'}}>
-                        <Skeleton variant='circle' width={270} height={270}/>
-                    </Grid>
-                </Grid>
-            </CardContent>
-        </Card>
-    )
-}
 const MoneyPieChart = ({moneyReceived, moneySpent,loading}) => {
     const data = {
         labels: ['Received (R)', 'Spent (R)'],
@@ -49,3 +33,20 @@ const MoneyPieChart = ({moneyReceived, moneySpent,loading}) => {
     );
 }
 export default MoneyPieChart;
+
+const displaySkeleton = () => {
+    return (
+        <Card>
+            <CardContent>
+                <div className='header'>
+                    <Typography variant='h6'><Skeleton variant='text'/></Typography>
+                </div>
+                <Grid container justify='center'>
+                    <Grid item style={{padding:'10px'}}>
+                        <Skeleton variant='circle' width={270} height={270}/>
+                    </Grid>
+                </Grid>
+            </CardContent>
+        </Card>
+    )
+}
