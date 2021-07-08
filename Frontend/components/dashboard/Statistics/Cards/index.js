@@ -10,33 +10,6 @@ import * as projectService from "../../../../services/projectsService";
 import * as donationService from "../../../../services/donationsService";
 import * as contributorService from "../../../../services/contributorService";
 
-const displaySkeletons=()=>{
-    const skeletons = [1,2,3,4,5,6,7,8];
-    return(
-        <Grid container spacing={2}>
-            {skeletons.map((skeletons,index) =>(
-                <Grid key={index} item xs={12} sm={6} md={3}>
-                    <Card>
-                        <CardContent>
-                            <Grid container spacing={2} alignItems='center' justify='center'>
-                                <Grid item sm={3}>
-                                    <Typography align='center'>
-                                        <Skeleton variant="circle" width={40} height={40} />
-                                    </Typography>
-                                </Grid>
-                                <Grid item sm={9}>
-                                    <Typography variant='h5' align='center'  style={{fontWeight:'bold'}}><Skeleton/>
-                                    </Typography>
-                                    <Typography align='center'><Skeleton/></Typography>
-                                </Grid>
-                            </Grid>
-                        </CardContent>
-                    </Card>
-                </Grid>
-            ))}
-        </Grid>
-    )
-}
 const Cards = ({suburb})=>{
 
     const currentMonth = new Date().getMonth();
@@ -105,6 +78,34 @@ const Cards = ({suburb})=>{
                                data={statsData.data}
                                icon={statsData.icon}
                                 color={statsData.color}/>
+                </Grid>
+            ))}
+        </Grid>
+    )
+}
+
+const displaySkeletons=()=>{
+    const skeletons = [1,2,3,4,5,6,7,8];
+    return(
+        <Grid container spacing={2}>
+            {skeletons.map((skeletons,index) =>(
+                <Grid key={index} item xs={12} sm={6} md={3}>
+                    <Card>
+                        <CardContent>
+                            <Grid container spacing={2} alignItems='center' justify='center'>
+                                <Grid item sm={3}>
+                                    <Typography align='center'>
+                                        <Skeleton variant="circle" width={40} height={40} />
+                                    </Typography>
+                                </Grid>
+                                <Grid item sm={9}>
+                                    <Typography variant='h5' align='center'  style={{fontWeight:'bold'}}><Skeleton/>
+                                    </Typography>
+                                    <Typography align='center'><Skeleton/></Typography>
+                                </Grid>
+                            </Grid>
+                        </CardContent>
+                    </Card>
                 </Grid>
             ))}
         </Grid>
