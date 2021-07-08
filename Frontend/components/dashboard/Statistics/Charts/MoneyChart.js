@@ -26,7 +26,7 @@ const MoneyChart = ({months, moneyReceived, moneySpent, moneySpentColor, moneyRe
         <Card>
             <CardContent>
                 <div className='header'>
-                    <Typography variant='h6'>Money received and Money spent</Typography>
+                    <Typography style={{margin:"10px"}} variant='h6'>Money received and Money spent</Typography>
                 </div>
                 <Bar data={data} options={options}/>
             </CardContent>
